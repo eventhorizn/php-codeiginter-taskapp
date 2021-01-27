@@ -246,6 +246,14 @@
    <?php endif ?>
    ```
    - Use session and errors key that we set in the controller
+1. Say you're editing a form and you put in incorrect values and hit save
+   - If you redirect 'back' (edit page), you need to know the bad value (not the one that's saved there)
+   - Use 'old' in front end
+     ```php
+     <input type="text" name="description" id="description"
+               value="<?= old('description', esc($task['description'])) ?>">
+     ```
+   - You also need to chain the '->withInput()' method on the controller redirect return
 
 ## Flash Messages
 
