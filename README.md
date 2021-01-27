@@ -71,3 +71,27 @@
      ```
    - Performs your connection for you
    - Don't have to write sql either
+
+## Links Between Pages
+
+1. You can use anchor tags to link directly to your page
+   ```php
+   <a href="/tasks/show/<?= $task['id'] ?>">
+      <?= $task['description'] ?>
+   </a>
+   ```
+1. You should use the `site_url` function instead
+   ```php
+   <a href="<?= site_url("/tasks/show/" . $task['id']) ?>">
+      <?= $task['description'] ?>
+   </a>
+   ```
+1. This generates the url for you
+   - CAVEAT: This will add your index page to the url
+     - http://taskapp.localhost/index/tasks/show/1
+   - To Fix
+     - app > Config > App.php
+     ```php
+     public $indexPage = '';
+     ```
+     - http://taskapp.localhost/tasks/shows/1
