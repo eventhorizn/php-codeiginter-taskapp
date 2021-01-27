@@ -71,6 +71,18 @@
      ```
    - Performs your connection for you
    - Don't have to write sql either
+1. Allowed Fields (insertion)
+
+   ```php
+   class TaskModel extends \CodeIgniter\Model
+   {
+      protected $table = 'task';
+
+      protected $allowedFields = ['description'];
+   }
+   ```
+
+   - Protects against mass insertion
 
 ## Links Between Pages
 
@@ -95,3 +107,31 @@
      public $indexPage = '';
      ```
      - http://taskapp.localhost/tasks/shows/1
+
+## Form Helper
+
+[Form Helper Documentation](https://www.codeigniter.com/user_guide/helpers/form_helper.html?highlight=form%20helper)
+
+1. You have to include the form helper in each controller that uses it
+1. In this course, we added it to the base controller Helper array
+   ```php
+   protected $helpers = ["form"];
+   ```
+1. Using the form helper
+
+   ```php
+   <?= form_open("/tasks/create") ?>
+
+   </form>
+   ```
+
+## Retrieving Input
+
+1. Base php
+   ```php
+   $something = isset($_POST['foo']) ? $_POST['foo'] : NULL;
+   ```
+1. CodeIgniter request
+   ```php
+   $something = $request->getVar('foo');
+   ```

@@ -22,4 +22,19 @@ class Tasks extends BaseController
 			'task' => $task
 		]);
 	}
+
+	public function new()
+	{
+		return view('Tasks/new');
+	}
+
+	public function create()
+	{
+		$model = new \App\Models\TaskModel;
+
+		$model->insert([
+			'description' => $this->request->getPost('description')
+		]);
+	
+	}
 }
