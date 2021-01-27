@@ -16,6 +16,36 @@
    - php.ini
      - Need to uncomment `extensions-intl`
 
+## Use Virtual Host To Access Framework
+
+1. In the httpd.conf file
+   - This is the Apache Config file
+   ```
+   # Virtual Hosts
+   Include etc/extra/httpd-vhosts.conf
+   ```
+1. Open the httpd-vhosts.conf
+
+   - This exists inside the xampp folder
+   - xampp > apache > conf > extra
+
+   ```conf
+   <VirtualHost *:81>
+    ServerName taskapp.localhost
+
+    DocumentRoot "C:\Users\gary.hake\source\personal\php-codeiginter-taskapp\public"
+
+    <Directory "C:\Users\gary.hake\source\personal\php-codeiginter-taskapp\public">
+        Require all granted
+        AllowOverride All
+    </Directory>
+   </VirtualHost>
+   ```
+
+1. Since I'm not using the default port 80, you have to reference the url like so:
+   - http://taskapp.localhost:81
+   - Otherwise you won't need the :port
+
 ## MVC Design
 
 1. Views
