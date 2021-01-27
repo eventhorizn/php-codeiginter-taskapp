@@ -284,3 +284,31 @@
 
 1. Flash messages only stay in session for the current request
    - Refresh or page change and they are gone
+
+## Entities
+
+[Documentation](https://www.codeigniter.com/user_guide/models/entities.html?highlight=entities)
+
+- Represent a single database row
+- Allows you to pass objects to your view instead of array pairs
+- Old
+  ```php
+  public function new()
+  {
+  	return view('Tasks/new', [
+  		'task' => ['description' => '']
+  	]);
+  }
+  ```
+- New
+
+  ```php
+  public function new()
+  {
+  	$task = new Task;
+
+  	return view('Tasks/new', [
+  		'task' => $task
+  	]);
+  }
+  ```
