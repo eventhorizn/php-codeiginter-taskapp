@@ -84,6 +84,29 @@
 
    - Protects against mass insertion
 
+1. Validation Rules
+
+   ```php
+   class TaskModel extends \CodeIgniter\Model
+   {
+      protected $table = 'task';
+
+      protected $allowedFields = ['description'];
+
+      protected $validationRules = [
+         'description' => 'required'
+      ];
+
+      protected $validationMessages = [
+        'description' => [
+            'required' => 'Please enter a description'
+        ]
+      ];
+   }
+   ```
+
+   - Can add your own validation messages
+
 ## Links Between Pages
 
 1. You can use anchor tags to link directly to your page
@@ -99,6 +122,7 @@
    </a>
    ```
 1. This generates the url for you
+
    - CAVEAT: This will add your index page to the url
      - http://taskapp.localhost/index/tasks/show/1
    - To Fix
@@ -135,3 +159,90 @@
    ```php
    $something = $request->getVar('foo');
    ```
+
+## Displaying Validation Errors/Redirect
+
+1. Above under the model section, we show how to define validation rules:
+
+   ```php
+   class TaskModel extends \CodeIgniter\Model
+   {
+      protected $table = 'task';
+
+      protected $allowedFields = ['description'];
+
+      protected $validationRules = [
+         'description' => 'required'
+      ];
+
+      protected $validationMessages = [
+        'description' => [
+            'required' => 'Please enter a description'
+        ]
+      ];
+   }
+   ```
+
+1. Showing Errors: Controller
+
+   ```php
+   public function create()
+   {
+   	$model = new \App\Models\TaskModel;
+
+   	$result = $model->insert([
+   		'description' => $this->request->getPost("description")
+   	]);
+
+   	if ($result === false) {
+   		return redirect()->back()
+   						 ->with('errors', $model->errors());
+   	} else {
+         return redirect()->to("/tasks/show/$result");
+   	}
+   }
+   ```
+
+   - Use the redirect() function, and pass it model errors
+
+1. Showing Errors: View
+   ```php
+   <?php if(session()->has('errors')): ?>
+    <ul>
+        <?php foreach(session('errors') as $error): ?>
+            <li><?= $error ?></li>
+        <?php endforeach ?>
+    </ul>
+   <?php endif ?>
+   ```
+   - Use session and errors key that we set in the controller
+
+## Flash Messages
+
+1. The Error message above is a type of flash message
+1. 'with' is how you define a flash message
+
+   ```php
+   public function create()
+   {
+   	$model = new \App\Models\TaskModel;
+
+   	$result = $model->insert([
+   		'description' => $this->request->getPost("description")
+   	]);
+
+   	if ($result === false) {
+   		return redirect()->back()
+   						 ->with('errors', $model->errors())
+   						 ->with('warning', 'Invalid data');
+   	} else {
+   		return redirect()->to("/tasks/show/$result")
+   						 ->with('info', 'Task created successfully');
+   	}
+   }
+   ```
+
+   - Display them the same as w/ the error messages above
+
+1. Flash messages only stay in session for the current request
+   - Refresh or page change and they are gone
