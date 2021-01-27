@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class TaskModel extends \CodeIgniter\Model
+use \CodeIgniter\Model;
+
+class TaskModel extends Model
 {
     protected $table = 'task';
 
