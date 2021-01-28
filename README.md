@@ -137,6 +137,24 @@
 
    - Can add your own validation messages
 
+1. Model Events (hashing a password)
+
+   ```php
+    protected $beforeInsert = ['hashPassword'];
+
+    protected function hashPassword(array $data)
+    {
+        if (isset($data['data']['password'])) {
+            $data['data']['password_hash'] =
+                password_hash($data['data']['password'], PASSWORD_DEFAULT);
+
+            unset($data['data']['password']);
+        }
+
+        return $data;
+    }
+   ```
+
 ## Links Between Pages
 
 1. You can use anchor tags to link directly to your page
@@ -254,6 +272,15 @@
                value="<?= old('description', esc($task['description'])) ?>">
      ```
    - You also need to chain the '->withInput()' method on the controller redirect return
+1. More complicated validation
+   ```php
+   protected $validationRules = [
+        'name' => 'required',
+        'email' => 'required|valid_email|is_unique[user.email]',
+        'password' => 'required|min_length[6]',
+        'password_confirmation' => 'required|matches[password]'
+    ];
+   ```
 
 ## Flash Messages
 
