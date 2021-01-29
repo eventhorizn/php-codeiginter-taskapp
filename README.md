@@ -421,3 +421,47 @@ $session->set('user_id', $user->id);
    ```php
    $auth = $auth = service('auth');
    ```
+
+## Controller Filters
+
+[Documentation](https://codeigniter4.github.io/userguide/incoming/filters.html)
+
+1. Using
+
+   ```php
+   <?php namespace App\Filters;
+
+   use CodeIgniter\HTTP\RequestInterface;
+   use CodeIgniter\HTTP\ResponseInterface;
+   use CodeIgniter\Filters\FilterInterface;
+
+   class LoginFilter implements FilterInterface
+   {
+      public function before(RequestInterface $request, $arguments = null)
+      {
+         if (!service('auth')->isLoggedIn()) {
+            return redirect()->to('/login')
+                        ->with('info', 'Please login first');
+         }
+      }
+
+      public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+      {
+         // Do something here
+      }
+   ```
+
+1. Configuring (app/Config/Filters.php)
+
+   ```php
+   public $aliases = [
+   	'csrf'     => \CodeIgniter\Filters\CSRF::class,
+   	'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
+   	'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+   	'login'	   => \App\Filters\LoginFilter::class
+   ];
+
+   public $filters = [
+   	'login' => ['before' => ['tasks/*', 'tasks']]
+   ];
+   ```
