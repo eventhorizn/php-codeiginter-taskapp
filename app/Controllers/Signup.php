@@ -16,7 +16,7 @@ class Signup extends BaseController
     {
         $user = new User($this->request->getPost());
 
-        $model = new UserModel;
+        $model = new UserModel();
 
         if( $model->insert($user)) {
             return redirect()->to("/signup/success");
