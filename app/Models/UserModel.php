@@ -44,4 +44,11 @@ class UserModel extends Model
 
         return $data;
     }
+
+    public function findByEmail($email)
+    {
+        return $this->where('email', $email)
+                    ->first();
+
+    }
 }
