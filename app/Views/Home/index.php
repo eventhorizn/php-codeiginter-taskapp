@@ -8,4 +8,17 @@
 
     <a href="<?= site_url("/signup") ?>">Sign up</a>
 
+    <?php if (session()->has('user_id')): ?>
+
+        <p>User is logged in</p>
+
+        <a href="<?= site_url("/logout") ?>">Log Out</a>
+    <?php else: ?>
+
+        <p>User is not logged in</p>
+
+          <a href="<?= site_url("/login") ?>">Log In</a>
+
+    <?php endif; ?>
+
 <?= $this->endSection() ?>

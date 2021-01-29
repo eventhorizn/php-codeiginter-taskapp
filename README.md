@@ -339,3 +339,20 @@
   	]);
   }
   ```
+
+## Session Library
+
+[Documentation](https://www.codeigniter.com/userguide3/libraries/sessions.html)
+
+```php
+$session = session();
+$session->regenerate(); // protect against session fixation attacks
+$session->set('user_id', $user->id);
+```
+
+1. By default, session persists for 2 hours
+   - To change: app > Config > app.php
+     ```php
+     public $sessionExpiration        = 7200;
+     ```
+   - Set to 0
