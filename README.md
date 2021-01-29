@@ -392,3 +392,32 @@ $session->set('user_id', $user->id);
 
 1. Do the above only if you need the helper in one controller
    - For all, put in BaseController
+
+## Services
+
+- Really just a factory that creates instances of a class
+- app > Config > Services.php
+
+1. Declaration
+
+   ```php
+   class Services extends CoreServices
+   {
+         // getShared = singleton
+         public static function auth($getShared = true)
+         {
+            if ($getShared)
+            {
+               return static::getSharedInstance('auth');
+            }
+
+            return new Authentication;
+         }
+   }
+   ```
+
+1. Use
+
+   ```php
+   $auth = $auth = service('auth');
+   ```
