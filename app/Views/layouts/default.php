@@ -37,6 +37,12 @@
         </div>
     <?php endif; ?>
 
+    <?php if(session()->has('error')): ?>
+        <div class="error">
+            <?= session('error') ?>
+        </div>
+    <?php endif; ?>
+
     <?= $this->renderSection("content") ?>
 
 </body>

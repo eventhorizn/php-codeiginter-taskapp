@@ -197,6 +197,32 @@
    </form>
    ```
 
+1. A big benefit of using the form helper is when including csrf protection (Filters.php)
+
+   ```php
+   public $aliases = [
+   	'csrf'     => \CodeIgniter\Filters\CSRF::class,
+   	'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
+   	'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+   	'login'	   => \App\Filters\LoginFilter::class,
+   	'guest'	   => \App\Filters\GuestFilter::class
+   ];
+
+   // Always applied before every request
+   public $globals = [
+   	'before' => [
+   		//'honeypot'
+   		'csrf',
+   	],
+   	'after'  => [
+   		'toolbar',
+   		//'honeypot'
+   	],
+   ];
+   ```
+
+   - This is included automatically in the form (hidden field w/ the csrf token)
+
 ## Retrieving Input
 
 1. Base php
