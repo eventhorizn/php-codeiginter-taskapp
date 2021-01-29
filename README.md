@@ -536,3 +536,17 @@ $session->set('user_id', $user->id);
    $routes->get('/signup', 'Signup::new', ['filter' => 'guest']);
    $routes->get('/login', 'Login::new', ['filter' => 'guest']);
    ```
+
+## Account Activation
+
+### Generate Random Activation Token
+
+1. randomkeygen.com
+   - This will be what is used to generate a random key
+   - Used in the `hash_hmac` function
+
+```php
+$token =  bin2hex(random_bytes(16));
+
+$hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
+```

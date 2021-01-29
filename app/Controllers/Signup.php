@@ -18,6 +18,8 @@ class Signup extends BaseController
 
         $model = new UserModel();
 
+        $user->startActivation();
+
         if( $model->insert($user)) {
             return redirect()->to("/signup/success");
         } else {
