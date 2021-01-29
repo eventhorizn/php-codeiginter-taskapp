@@ -356,6 +356,41 @@ $session->set('user_id', $user->id);
      public $sessionExpiration        = 7200;
      ```
    - Set to 0
+1. Can use session to save redirect urls
+
+   - For exampmle, a user has a bookmark, but needs to log in to see the page
+   - We want to make them log in, then route them to the page they requested
+
+   ```php
+   class LoginFilter implements FilterInterface
+   {
+      public function before(RequestInterface $request, $arguments = null)
+      {
+         if (!service('auth')->isLoggedIn()) {
+               session()->set('redirect_url', current_url());
+
+            return redirect()->to('/login')
+                        ->with('info', 'Please login first');
+         }
+      }
+
+      public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+      {
+         // Do something here
+      }
+   }
+   ```
+
+   - Then in the Login controller
+
+   ```php
+   $redirect_url = session('redirect_url') ?? '/';
+
+   unset($_SESSION['redirect_url']);
+
+   return redirect()->to($redirect_url)
+                     ->with('info', 'Login successful');
+   ```
 
 ## Helper Functions
 
