@@ -6,6 +6,8 @@ use \App\Models\UserModel;
 
 class Authentication
 {
+    private $user;
+
     public function login($email, $password)
     {
         $model = new UserModel;
@@ -38,9 +40,12 @@ class Authentication
             return null;
         }
 
-        $model = new UserModel;
+        if ($this->user === null) {
+            $model = new UserModel;
 
-        return $model->find(session()->get('user_id'));
+            $this->user = $model->find(session()->get('user_id'));
+        }
 
+        return $this->user;
     }
 }
