@@ -42,6 +42,7 @@ class UserModel extends Model
                 password_hash($data['data']['password'], PASSWORD_DEFAULT);
 
             unset($data['data']['password']);
+            unset($data['data']['password_confirmation']);
         }
 
         return $data;

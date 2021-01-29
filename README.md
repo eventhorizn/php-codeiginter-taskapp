@@ -91,6 +91,10 @@
      ```cmd
      php spark migrate rollback
      ```
+1. [Seeders](https://codeigniter4.github.io/userguide/dbmgmt/seeds.html?highlight=seeder
+   ```cmd
+     php spark make:seeder UserSeeder
+   ```
 1. Model Classes
    - The name link between a model an a DB table
      ```php
