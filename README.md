@@ -465,3 +465,9 @@ $session->set('user_id', $user->id);
    	'login' => ['before' => ['tasks/*', 'tasks']]
    ];
    ```
+
+1. Route Filters
+   ```php
+   $routes->get('/signup', 'Signup::new', ['filter' => 'guest']);
+   $routes->get('/login', 'Login::new', ['filter' => 'guest']);
+   ```
