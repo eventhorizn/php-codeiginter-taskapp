@@ -3,12 +3,8 @@
 if (!function_exists('current_user')) {
     function current_user()
     {
-        if (!session()->has('user_id')) {
-            return null;
-        }
+        $auth = new \App\Libraries\Authentication;
 
-        $model = new \App\Models\UserModel;
-
-        return $model->find(session()->get('user_id'));
+        return $auth->getCurrentUser();
     }
 }

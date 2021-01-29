@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use \App\Models\UserModel;
+use \App\Libraries\Authentication;
 
 class Login extends BaseController
 {
@@ -16,34 +16,23 @@ class Login extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $model = new UserModel;
-
-        $user = $model->where('email', $email)
-                      ->first();
-
-        if ($user === null) {
+        $auth = new Authentication;
+        
+        if ($auth->login($email, $password)) {
+            return redirect()->to("/")
+                             ->with('info', 'Login successful');
+        } else {
             return redirect()->back()
                              ->withInput()
-                             ->with('warning', 'User not found');
-        } else {
-            if(password_verify($password, $user->password_hash)) {
-                $session = session();
-                $session->regenerate(); // session fixation attacks
-                $session->set('user_id', $user->id);
-
-                return redirect()->to("/")
-                                 ->with('info', 'Login successful');
-            } else {
-                return redirect()->back()
-                                 ->withInput()
-                                 ->with('warning', 'Incorrect password');
-            }
+                             ->with('warning', 'Invalid login');
         }
     }
 
     public function delete()
     {
-        session()->destroy();
+        $auth = new Authentication;
+
+        $auth->logout();
 
         return redirect()->to('/login/showLogoutMessage');
     }
