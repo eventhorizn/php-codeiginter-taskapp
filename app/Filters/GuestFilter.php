@@ -17,3 +17,4 @@ class GuestFilter implements FilterInterface
     {
         // Do something here
     }
+}
