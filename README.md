@@ -356,3 +356,39 @@ $session->set('user_id', $user->id);
      public $sessionExpiration        = 7200;
      ```
    - Set to 0
+
+## Helper Functions
+
+1. app > Helpers
+1. To define
+
+   ```php
+   <?php
+
+   if (!function_exists('current_user')) {
+      function current_user()
+      {
+         if (!session()->has('user_id')) {
+               return null;
+         }
+
+         $model = new \App\Models\UserModel;
+
+         return $model->find(session()->get('user_id'));
+      }
+   }
+   ```
+
+1. To use
+
+   ```php
+   public function index()
+   {
+   	helper('auth');
+
+   	return view("Home/index");
+   }
+   ```
+
+1. Do the above only if you need the helper in one controller
+   - For all, put in BaseController
