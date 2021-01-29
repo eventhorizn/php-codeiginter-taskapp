@@ -13,7 +13,8 @@ class UserSeeder extends Seeder
 			'name'		=> 'Admin',
 			'email'		=> 'admin@example.com',
 			'password'	=> 'secret',
-			'is_admin'	=> true
+			'is_admin'	=> true,
+			'is_active' => true
 		];
 		
 		$model->skipValidation(true)

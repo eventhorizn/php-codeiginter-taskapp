@@ -550,3 +550,8 @@ $token =  bin2hex(random_bytes(16));
 
 $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
 ```
+
+1. [Email](https://codeigniter4.github.io/userguide/libraries/email.html)
+   - Need an email server to send the emails
+     - Use gmail
+   - app > Confic > Email.php
