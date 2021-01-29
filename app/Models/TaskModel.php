@@ -24,9 +24,11 @@ class TaskModel extends Model
         ]
     ];
 
-    public function getTasksByUserId($id)
+    public function paginateTasksByUserId($id)
     {
-        return $this->where('user_id', $id)->findAll();
+        return $this->where('user_id', $id)
+                    ->orderBy('created_at')
+                    ->paginate(5);
     }
 
     public function getTaskByUserId($id, $user_id)
