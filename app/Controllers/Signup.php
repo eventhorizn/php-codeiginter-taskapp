@@ -38,7 +38,16 @@ class Signup extends BaseController
         return view('Signup/success');
     }
 
-    public function sendActivationEmail($user)
+    public function activate($token)
+    {
+        $model = new UserModel();
+
+        $model->activateByToken($token);
+
+        return view('Signup/activated');
+    }
+
+    private function sendActivationEmail($user)
     {
         $email = service('email');
 		$email->setTo($user->email);
@@ -51,14 +60,5 @@ class Signup extends BaseController
 		$email->setMessage($message);
 
 		$email->send();
-    }
-
-    public function activate($token)
-    {
-        $model = new UserModel();
-
-        $model->activateByToken($token);
-
-        return view('Signup/activated');
     }
 }

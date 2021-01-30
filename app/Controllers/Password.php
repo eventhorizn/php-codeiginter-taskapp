@@ -37,7 +37,54 @@ class Password extends BaseController
         return view('Password/reset_sent');
     }
 
-    public function sendResetEmail($user)
+    public function reset($token)
+    {
+        $model = new UserModel();
+
+        $user = $model->getUserForPasswordReset($token);
+
+        if ($user) {
+            return view('Password/reset', [
+                'token' => $token
+            ]);
+        } else {
+            return redirect()->to('/password/forgot')
+                             ->with('warning', 'Link invalid or has expired. Please try again');
+        }
+    }
+
+    public function processReset($token)
+    {
+         $model = new UserModel();
+
+        $user = $model->getUserForPasswordReset($token);
+
+        if ($user) {
+            $user->fill($this->request->getPost());
+
+            if($model->save($user)) {
+                $user->completePasswordReset();
+
+                $model->save($user);
+
+                return redirect()->to('/password/resetsuccess');
+            } else {
+                return redirect()->back()
+                                 ->with('errors', $model->errors())
+                                 ->with('warning', 'Invalid data');
+            }
+        } else {
+            return redirect()->to('/password/forgot')
+                             ->with('warning', 'Link invalid or has expired. Please try again');
+        }
+    }
+
+    public function resetSuccess()
+    {
+        return view('Password/reset_success');
+    }
+
+    private function sendResetEmail($user)
     {
         $email = service('email');
 		$email->setTo($user->email);
