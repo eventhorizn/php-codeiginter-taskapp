@@ -23,4 +23,15 @@ class User extends \CodeIgniter\Entity
         $this->is_active = true;
         $this->activation_hash = null;
     }
+
+    public function startPasswordReset()
+    {
+        $token = new Token();
+
+        $this->reset_token = $token->getValue();
+
+        $this->reset_hash = $token->getHash();
+
+        $this->reset_expires_at = date('Y-m-d H:i:s', time() + 7200);
+    }
 }
