@@ -91,7 +91,7 @@
      ```cmd
      php spark migrate rollback
      ```
-1. [Seeders](https://codeigniter4.github.io/userguide/dbmgmt/seeds.html?highlight=seeder
+1. [Seeders](https://codeigniter4.github.io/userguide/dbmgmt/seeds.html?highlight=seeder)
    ```cmd
      php spark make:seeder UserSeeder
    ```
@@ -168,11 +168,13 @@
    </a>
    ```
 1. You should use the `site_url` function instead
+   - [Documentation](https://codeigniter.com/user_guide/helpers/url_helper.html)
    ```php
    <a href="<?= site_url("/tasks/show/" . $task['id']) ?>">
       <?= $task['description'] ?>
    </a>
    ```
+   - Makes your site more portable in the case your url's change
 1. This generates the url for you
 
    - CAVEAT: This will add your index page to the url
@@ -555,3 +557,24 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
    - Need an email server to send the emails
      - Use gmail
    - app > Confic > Email.php
+   - Changing the fromEmail and fromName (but you can see all the options)
+   - Lookup the gmail notes for using it as the smtp server
+   - We are putting settings in the .env file for local storage
+1. So, with everything above set up, the idea is that when a user registers
+
+   - We generate the above hash, and save it to the User table
+   - We send an email w/ that hash as part of url
+   - When the user clicks on that link we handle it on our end
+     - Lookup user by hash
+   - Signup controller > activate
+
+   ```php
+   public function activate($token)
+   {
+        $model = new UserModel();
+
+        $model->activateByToken($token);
+
+        return view('Signup/activated');
+   }
+   ```
