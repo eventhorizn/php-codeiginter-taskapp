@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Libraries\Token;
 class User extends \CodeIgniter\Entity
 {
     public function verifyPassword($password)
@@ -11,10 +12,10 @@ class User extends \CodeIgniter\Entity
 
     public function startActivation()
     {
-        $this->token =  bin2hex(random_bytes(16));
+        $token = new Token();
+        $this->token =  $token->getValue();
 
-        $this->activation_hash = 
-            hash_hmac('sha256', $this->token, $_ENV['HASH_SECRET_KEY']);
+        $this->activation_hash = $token->getHash();
     }
 
     public function activate()
