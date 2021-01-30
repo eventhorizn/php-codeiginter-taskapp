@@ -40,7 +40,8 @@ class Filters extends BaseConfig
 			'before' => [
 				'tasks/*', 'tasks',
 				'admin/*',
-				'profile/*'
+				'profile/*',
+				'profileimage/*'
 			]	
 		],
 		'admin' => [
