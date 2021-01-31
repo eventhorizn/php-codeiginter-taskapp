@@ -578,3 +578,34 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
         return view('Signup/activated');
    }
    ```
+
+## Cookies
+
+1. We have functionality to store a user's login when closing and opening the browser
+1. To get this functionality working, we are storing a user and a token in a separate table
+   - remembered_login
+1. In order for the token to login to happen automatically, we need to store the token in a cookie
+
+   - [Documentation](https://codeigniter.com/user_guide/helpers/cookie_helper.html)
+
+   ```php
+   private function rememberLogin($user_id)
+   {
+        $model = new RememberedLoginModel();
+
+        list($token, $expiry) = $model->rememberUserLogin($user_id);
+
+        $response = service('response');
+
+        $response->setCookie('remember_me', $token, $expiry);
+   }
+   ```
+
+   - The controller that is responsible for calling a function that set's a cookie, needs to redirect with cookies
+     ```php
+     return redirect()->to($redirect_url)
+               ->with('info', 'Login successful')
+               ->withCookies();
+     ```
+
+1. Retreiving Cookies
