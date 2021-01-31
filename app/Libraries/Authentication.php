@@ -38,6 +38,16 @@ class Authentication
 
     public function logout()
     {
+        $token = service('request')->getCookie('remember_me');
+
+        if ($token !== null) {
+            $model = new RememberedLoginModel();
+
+            $model->deleteByToken($token);
+        }
+
+        service('response')->deleteCookie('remember_me');
+
         session()->destroy();
     }
 

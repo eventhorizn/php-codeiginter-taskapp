@@ -609,3 +609,10 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
      ```
 
 1. Retreiving Cookies
+   ```php
+   $token = service('request')->getCookie('remember_me');
+   ```
+1. Something to note. We must make sure we delete this row when logging out manually
+   - Otherwise, the cookie keeps us logged in
+   - We delete the row, and delete the cookie
+   - Similar to when setting the cookie, include `withCookies()` which will delete the cookie from the browser

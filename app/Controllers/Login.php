@@ -37,7 +37,8 @@ class Login extends BaseController
     {
         service('auth')->logout();
 
-        return redirect()->to('/login/showLogoutMessage');
+        return redirect()->to('/login/showLogoutMessage')
+                         ->withCookies();
     }
 
     // This is a new request, so will new a new session
