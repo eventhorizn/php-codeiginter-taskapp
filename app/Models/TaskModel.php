@@ -37,4 +37,17 @@ class TaskModel extends Model
                     ->where('user_id', $user_id)
                     ->first();
     }
+
+    public function search($term, $user_id)
+    {
+        if ($term === null) {
+            return [];
+        }
+
+        return $this->select('id, description')
+                    ->where('user_id', $user_id)
+                    ->like('description', $term)
+                    ->get()
+                    ->getResultArray();
+    }
 }

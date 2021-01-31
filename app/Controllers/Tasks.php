@@ -117,6 +117,17 @@ class Tasks extends BaseController
 		]);
 	}
 
+	public function search()
+	{
+		$tasks =
+			 $this->model->search($this->request->getGet('q'), $this->current_user->id);
+
+		// $this->response->setContentType('application/json');
+		// echo json_encode($tasks);
+		
+		return $this->response->setJSON($tasks);
+	}
+
 	private function getTaskOr404($id) 
 	{
 		// $task = $this->model->find($id);

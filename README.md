@@ -616,3 +616,39 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
    - Otherwise, the cookie keeps us logged in
    - We delete the row, and delete the cookie
    - Similar to when setting the cookie, include `withCookies()` which will delete the cookie from the browser
+1. Last but not least, we need to cleanup the remembered_login table
+
+   - We only delete rows when a user manually logs out
+   - We need a way to clean up expired rows
+   - [Custom Commands](https://codeigniter.com/user_guide/cli/cli_commands.html)
+     - app > Commands
+   - File name **must** match class name to work
+
+   ```php
+   <?php namespace App\Commands;
+
+   use App\Models\RememberedLoginModel;
+   use CodeIgniter\CLI\BaseCommand;
+   use CodeIgniter\CLI\CLI;
+
+   class DeleteExpiredRememberedLogins extends BaseCommand
+   {
+      protected $group       = 'Auth';
+      protected $name        = 'auth:cleanup';
+      protected $description = 'Clears expired remembered login records.';
+
+      public function run(array $params)
+      {
+         $model = new RememberedLoginModel();
+
+         $rows = $model->deleteExpired();
+
+         echo "$rows rows deleted.\n";
+      }
+   }
+   ```
+
+## AJAX, Javascript, AutoComplete
+
+1. We are going to create and autocomplete search for tasks
+   - [Pixabay autoComplete](https://goodies.pixabay.com/javascript/auto-complete/demo.html)
