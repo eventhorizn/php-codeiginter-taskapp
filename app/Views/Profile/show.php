@@ -4,14 +4,16 @@
 
 <?= $this->section("content") ?>
 
-<h1>Profile</h1>
+<h1 class="title">Profile</h1>
 
 <?php if ($user->profile_image): ?>
 
     <img src="<?= site_url('/profile/image') ?>" 
           width="200" height="200" alt="profile_image">
 
-    <a href="<?= site_url("/profileimage/delete") ?>">Delete Profile Image</a>
+    <div>
+        <a class="button is-danger is-light" href="<?= site_url("/profileimage/delete") ?>">Delete Profile Image</a>
+    </div>
 
 <?php else: ?>
 
@@ -20,18 +22,20 @@
 
 <?php endif; ?>
 
-<dl>
-    <dt>Name</dt>
-    <dd><?= esc($user->name) ?></dd>
+<div class="content">
+    <dl>
+        <dt class="has-text-weight-bold">Name</dt>
+        <dd><?= esc($user->name) ?></dd>
 
-    <dt>Email</dt>
-    <dd><?= esc($user->email) ?></dd>
-</dl>
+        <dt class="has-text-weight-bold">Email</dt>
+        <dd><?= esc($user->email) ?></dd>
+    </dl>
+</div>
 
-<a href="<?= site_url("/profile/edit") ?>">Edit</a>
+<a class="button is-link" href="<?= site_url("/profile/edit") ?>">Edit</a>
 
-<a href="<?= site_url("/profile/editpassword") ?>">Change Password</a>
+<a class="button is-link" href="<?= site_url("/profile/editpassword") ?>">Change Password</a>
 
-<a href="<?= site_url("/profileimage/edit") ?>">Change Profile Image</a>
+<a class="button is-link" href="<?= site_url("/profileimage/edit") ?>">Change Profile Image</a>
 
 <?= $this->endSection() ?>

@@ -4,7 +4,7 @@
 
 <?= $this->section("content") ?>
 
-<h1>Edit User</h1>
+<h1 class="title">Edit User</h1>
 
 <?php if(session()->has('errors')): ?>
     <ul>
@@ -14,11 +14,24 @@
     </ul>
 <?php endif ?>
 
-<?= form_open("/admin/users/update/" . $user->id) ?>
-    <?= $this->include('Admin/Users/form') ?>
+<div class="container">
 
-    <button>Save</button>
-    <a href="<?= site_url("/admin/users/show/" . $user->id) ?>">Cancel</a>
-</form>
+    <?= form_open("/admin/users/update/" . $user->id) ?>
+
+        <?= $this->include('Admin/Users/form') ?>
+        
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary">Save</button>
+            </div>
+            
+            <div class="control">
+                <a class="button" href="<?= site_url("/admin/users/show/" . $user->id) ?>">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
 
 <?= $this->endSection() ?>

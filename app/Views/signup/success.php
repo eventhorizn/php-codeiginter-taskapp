@@ -4,7 +4,7 @@
 
 <?= $this->section("content") ?>
 
-<h1>Signup</h1>
+<h1 class="title">Signup</h1>
 
 <p>Signup Successful</p>
 

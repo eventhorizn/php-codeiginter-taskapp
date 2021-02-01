@@ -4,7 +4,7 @@
 
 <?= $this->section("content") ?>
 
-<h1>Signup</h1>
+<h1 class="title">Signup</h1>
 
 <?php if(session()->has('errors')): ?>
     <ul>
@@ -14,29 +14,46 @@
     </ul>
 <?php endif ?>
 
-<?= form_open("/signup/create") ?>
-    <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="<?= old('name') ?>">
-    </div>
+<div class="container">
 
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?= old('email') ?>">
-    </div>
+    <?= form_open("/signup/create") ?>
+        <div class="field">
+            <label class="label" for="name">Name</label>
+            <div class="control">
+                <input class="input" type="text" name="name" id="name" value="<?= old('name') ?>">
+            </div>
+        </div>
 
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password">
-    </div>
+        <div class="field">
+            <label class="label" for="email">Email</label>
+            <div class="control">
+                <input class="input" type="text" name="email" id="email" value="<?= old('email') ?>">
+            </div>
+        </div>
 
-    <div>
-        <label for="password_confirmation">Repeat Password</label>
-        <input type="password" name="password_confirmation">
-    </div>
+        <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+                <input class="input" type="password" name="password">
+            </div>
+        </div>
 
-    <button>Signup</button>
-    <a href="<?= site_url("/") ?>">Cancel</a>
-</form>
+        <div class="field">
+            <label class="label" for="password_confirmation">Repeat Password</label>
+            <div class="control">
+                <input class="input" type="password" name="password_confirmation">
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary">Signup</button>
+            </div>
+            
+            <a href="<?= site_url("/") ?>">Cancel</a>
+        </div>
+    </form>
+
+</div>
 
 <?= $this->endSection() ?>

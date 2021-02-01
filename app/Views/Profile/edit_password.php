@@ -4,7 +4,7 @@
 
 <?= $this->section('content') ?>
 
-<h1>Edit Password</h1>
+<h1 class="title">Edit Password</h1>
 
 <?php if (session()->has('errors')): ?>
     <ul>
@@ -14,26 +14,37 @@
     </ul>
 <?php endif ?>
 
-<?= form_open("/profile/updatepassword") ?>
+<div class="container">
 
-    <div>
-        <label for="current_password">Current Password</label>
-        <input type="password" name="current_password">
-    </div>
+    <?= form_open("/profile/updatepassword") ?>
 
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password">
-    </div>
+        <div class="field">
+            <label class="label" for="current_password">Current password</label>
+            <input class="input" type="password" name="current_password">
+        </div>
+        
+        <div class="field">
+            <label class="label" for="password">New password</label>
+            <input class="input" type="password" name="password">
+        </div>
+        
+        <div class="field">
+            <label class="label" for="password_confirmation">Repeat new password</label>
+            <input class="input" type="password" name="password_confirmation">
+        </div>
+        
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary">Save</button>
+            </div>
 
-    <div>
-        <label for="password_confirmation">Repeat New Password</label>
-        <input type="password" name="password_confirmation">
-    </div>
-    
-    <button>Save</button>
-    <a href="<?= site_url("/profile/show") ?>">Cancel</a>
+            <div class="control">
+                <a class="button" href="<?= site_url("/profile/show") ?>">Cancel</a>
+            </div>
+        </div>
 
-</form>
+    </form>
+
+</div>
 
 <?= $this->endSection() ?>

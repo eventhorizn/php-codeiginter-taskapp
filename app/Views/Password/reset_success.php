@@ -4,7 +4,7 @@
 
 <?= $this->section("content") ?>
 
-<h1>Password Reset</h1>
+<h1 class="title">Password Reset</h1>
 
 <p>Password reset successful</p>
 

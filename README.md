@@ -652,3 +652,7 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
 
 1. We are going to create and autocomplete search for tasks
    - [Pixabay autoComplete](https://goodies.pixabay.com/javascript/auto-complete/demo.html)
+
+## Styling
+
+1. We are using a css framerwork called [Bulma](https://bulma.io/)

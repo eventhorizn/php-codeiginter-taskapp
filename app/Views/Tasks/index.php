@@ -4,13 +4,13 @@
 
 <?= $this->section("content") ?>
 
-    <h1>Tasks</h1>
+    <h1 class="title">Tasks</h1>
 
-    <a href="<?= site_url("/tasks/new") ?>">New Task</a>
+    <a class="button is-link" href="<?= site_url("/tasks/new") ?>">New Task</a>
 
     <div>
-        <label for="query">Search</label>
-        <input name="query" id="query">
+        <label class="label" for="query">Search</label>
+        <input class="input" name="query" id="query">
     </div>
 
     <?php if ($tasks): ?>
@@ -25,7 +25,7 @@
             <?php endforeach; ?>
         </ul>
 
-    <?= $pager->links() ?>
+    <?= $pager->simpleLinks() ?>
     
     <?php else: ?>
 

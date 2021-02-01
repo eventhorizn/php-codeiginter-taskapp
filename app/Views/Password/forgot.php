@@ -4,17 +4,25 @@
 
 <?= $this->section("content") ?>
 
-<h1>Forgot Password</h1>
+    <h1 class="title">Forgot Password</h1>
 
-<?= form_open("/password/processforgot") ?>
+<div class="container">
 
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?= old('email') ?>">
-    </div>
+    <?= form_open("/password/processforgot") ?>
 
-    <button>Send</button>
+        <div class="field">
+            <label class="label" for="email">email</label>
+            <input class="input" type="text" name="email" id="email" value="<?= old('email') ?>">
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <button class="button is-primary">Send</button>
+            </div>
+        </div>
 
-</form>
+    </form>
+
+</div>
 
 <?= $this->endSection() ?>
