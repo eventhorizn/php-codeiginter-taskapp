@@ -35,7 +35,7 @@
             </div>
             
             <div class="control">
-                <a href="<?= site_url("/password/forgot") ?>">Forgot Password?</a>
+                <!-- <a href="<?= site_url("/password/forgot") ?>">Forgot Password?</a> -->
             </div>
             
         </div>

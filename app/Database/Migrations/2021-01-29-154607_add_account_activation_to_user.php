@@ -15,7 +15,7 @@ class AddAccountActivationToUser extends Migration
 			'is_active'	=> [
 				'type'			=> 'BOOLEAN',
 				'null'			=> false,
-				'default'		=> false
+				'default'		=> true
 			]
 		]);
 	}

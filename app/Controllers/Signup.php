@@ -21,7 +21,7 @@ class Signup extends BaseController
         $user->startActivation();
 
         if( $model->insert($user)) {
-            $this->sendActivationEmail($user);
+            //$this->sendActivationEmail($user);
 
             return redirect()->to("/signup/success");
         } else {

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTask extends Migration 
+class AddTimestsampsToTask extends Migration 
 {
     public function up()
     {

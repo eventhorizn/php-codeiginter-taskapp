@@ -656,3 +656,43 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
 ## Styling
 
 1. We are using a css framerwork called [Bulma](https://bulma.io/)
+
+# Deployment
+
+1. Digital Ocean
+1. Create private ssh key
+   - Through putty
+1. Set up Ubunutu Droplet
+   - Hook to ssh key you created
+1. Reset Droplet Password
+   - Emails you the randomly generated pwd
+1. Log in to box, reset root pwd
+1. DO has templates, but I opted to build mine from scratch
+   - [Initial Server Setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
+   - [LAMP Setup](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04)
+   - [Setup Apache Virtual Hosts](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-18-04)
+     - Allows for multiple domiains
+   - [Secure Apache](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-20-04)
+1. Make sure your php.ini matches local
+   - Install php intl extension
+1. Domains are somewhat tricky
+   - I bought a base domain from google
+   - Moved hostnames to DO (allows me to manage DNS there)
+   - Add records for each subdomain
+   - [Add Domain](https://www.digitalocean.com/docs/networking/dns/how-to/add-domains/)
+   - [Add Subdomain](https://www.digitalocean.com/docs/networking/dns/how-to/add-subdomain/)
+   - [DNS Checker](https://dnschecker.org/#AAAA/taskapp.garyhake.dev)
+1. Finally, making sure a CodeIgniter app runs
+   - [Ubuntu CodeIgniter](https://www.howtoforge.com/tutorial/ubuntu-codeigniter/)
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite
+
+```bash
+sudo apt install php7.4-mbstring
+
+sudo apt-get install php-gd
+```
+
+```bash
+sudo chown -R www-data:www-data /var/www/taskapp.garyhake.dev/codeigniter/writable
+```
