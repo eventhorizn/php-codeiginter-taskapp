@@ -684,15 +684,14 @@ $hash = hash_hmac('sha256', $token, 'key_from_randomkeygen');
    - [DNS Checker](https://dnschecker.org/#AAAA/taskapp.garyhake.dev)
 1. Finally, making sure a CodeIgniter app runs
    - [Ubuntu CodeIgniter](https://www.howtoforge.com/tutorial/ubuntu-codeigniter/)
+1. Extensions I had to install
 
-https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite
+   ```bash
+   sudo apt install php7.4-mbstring
 
-```bash
-sudo apt install php7.4-mbstring
+   sudo apt-get install php-gd
+   ```
 
-sudo apt-get install php-gd
-```
-
-```bash
-sudo chown -R www-data:www-data /var/www/taskapp.garyhake.dev/codeigniter/writable
-```
+   ```bash
+   sudo chown -R www-data:www-data /var/www/taskapp.garyhake.dev/codeigniter/writable
+   ```
